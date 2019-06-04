@@ -127,7 +127,8 @@ Install the other necessary packages by issuing the following commands:
 (tensorflow1) C:\> pip install opencv-python
 ```
 (Note: The ‘pandas’ and ‘opencv-python’ packages are not needed by TensorFlow, but they are used in the Python scripts to generate TFRecords and to work with images, videos, and webcam feeds.)
-
+全部软件安装完之后，安装包可逐个核对列表，看是否与我的相符（主要检查上述几个安装包是否正确，最好确保python、TensorFlow版本一致）
+[Packages in environment] (doc/Packages in environment.txt)
 #### 2e. Configure PYTHONPATH environment variable
 A PYTHONPATH variable must be created that points to the \models, \models\research, and \models\research\slim directories. Do this by issuing the following commands (from any directory):
 ```
