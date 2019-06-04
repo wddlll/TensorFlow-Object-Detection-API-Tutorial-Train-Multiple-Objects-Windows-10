@@ -422,9 +422,10 @@ Save the file after the changes have been made. That’s it! The training job is
 *As of version 1.9, TensorFlow has deprecated the "train.py" file and replaced it with "model_main.py" file. I haven't been able to get model_main.py to work correctly yet (I run in to errors related to pycocotools). Fortunately, the train.py file is still available in the /object_detection/legacy folder. Simply move train.py from /object_detection/legacy into the /object_detection folder and then continue following the steps below.*
 
 Here we go! From the \object_detection directory, issue the following command to begin training:
-Simply move train.py from /object_detection/legacy into the /object_detection
+Simply move train.py from /object_detection/legacy into the /object_detection，确保object_detection根目录下存在train.py文件
 ```
 cd C:\tensorflow1\models\research\object_detection
+copy .\legacy\train.py .\
 python train.py --logtostderr --train_dir=training/ --pipeline_config_path=training/faster_rcnn_inception_v2_pets.config
 ```
 If everything has been set up correctly, TensorFlow will initialize the training. The initialization can take up to 30 seconds before the actual training begins. When training begins, it will look like this:
