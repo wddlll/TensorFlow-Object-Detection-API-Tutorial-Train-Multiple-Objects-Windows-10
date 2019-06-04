@@ -42,12 +42,14 @@ TensorFlow-GPU allows your PC to use the video card to provide extra processing 
 
 
 ## Steps
-### 1. Install TensorFlow-GPU 1.5 (skip this step if TensorFlow-GPU 1.5 is already installed)
+### 1. Install TensorFlow-GPU 1.5 or TensorFlow-CPU 1.12.0 (skip this step if TensorFlow-GPU 1.5 is already installed)
 Install TensorFlow-GPU by following the instructions in [this YouTube Video by Mark Jay](https://www.youtube.com/watch?v=RplXYjxgZbw).
 
 The video is made for TensorFlow-GPU v1.4, but the “pip install --upgrade tensorflow-gpu” command will automatically download version 1.5. Download and install CUDA v9.0 and cuDNN v7.0 (rather than CUDA v8.0 and cuDNN v6.0 as instructed in the video), because they are supported by TensorFlow-GPU v1.5. As future versions of TensorFlow are released, you will likely need to continue updating the CUDA and cuDNN versions to the latest supported version.
 
 Be sure to install Anaconda with Python 3.6 as instructed in the video, as the Anaconda virtual environment will be used for the rest of this tutorial.
+
+我安装的是Anaconda3-5.0.1-Windows-x86_64.exe版本，Python 3.5.0，TensorFlow-CPU 1.12.0，可以成功安装。
 
 Visit [TensorFlow's website](https://www.tensorflow.org/install/install_windows) for further installation details, including how to install it on other operating systems (like Linux). The [object detection repository](https://github.com/tensorflow/models/tree/master/research/object_detection) itself also has [installation instructions](https://github.com/tensorflow/models/blob/master/research/object_detection/g3doc/installation.md).
 
@@ -101,7 +103,7 @@ Next, we'll work on setting up a virtual environment in Anaconda for tensorflow-
 
 In the command terminal that pops up, create a new virtual environment called “tensorflow1” by issuing the following command:
 ```
-C:\> conda create -n tensorflow1 pip python=3.5
+C:\> conda create -n tensorflow1 pip python=3.5.0
 ```
 Then, activate the environment by issuing:
 ```
@@ -110,6 +112,8 @@ C:\> activate tensorflow1
 Install tensorflow-gpu in this environment by issuing:
 ```
 (tensorflow1) C:\> pip install --ignore-installed --upgrade tensorflow-gpu
+CPU版本，Install tensorflow-cpu in this environment by issuing:
+```pip install --upgrade tensorflow==1.12.0
 ```
 Install the other necessary packages by issuing the following commands:
 ```
@@ -137,6 +141,9 @@ Next, compile the Protobuf files, which are used by TensorFlow to configure mode
 In the Anaconda Command Prompt, change directories to the \models\research directory and copy and paste the following command into the command line and press Enter:
 ```
 protoc --python_out=. .\object_detection\protos\anchor_generator.proto .\object_detection\protos\argmax_matcher.proto .\object_detection\protos\bipartite_matcher.proto .\object_detection\protos\box_coder.proto .\object_detection\protos\box_predictor.proto .\object_detection\protos\eval.proto .\object_detection\protos\faster_rcnn.proto .\object_detection\protos\faster_rcnn_box_coder.proto .\object_detection\protos\grid_anchor_generator.proto .\object_detection\protos\hyperparams.proto .\object_detection\protos\image_resizer.proto .\object_detection\protos\input_reader.proto .\object_detection\protos\losses.proto .\object_detection\protos\matcher.proto .\object_detection\protos\mean_stddev_box_coder.proto .\object_detection\protos\model.proto .\object_detection\protos\optimizer.proto .\object_detection\protos\pipeline.proto .\object_detection\protos\post_processing.proto .\object_detection\protos\preprocessor.proto .\object_detection\protos\region_similarity_calculator.proto .\object_detection\protos\square_box_coder.proto .\object_detection\protos\ssd.proto .\object_detection\protos\ssd_anchor_generator.proto .\object_detection\protos\string_int_label_map.proto .\object_detection\protos\train.proto .\object_detection\protos\keypoint_box_coder.proto .\object_detection\protos\multiscale_anchor_generator.proto .\object_detection\protos\graph_rewriter.proto
+
+cd C:\tensorflow1\models\research\
+protoc --python_out=. .\object_detection\protos\calibration.proto .\object_detection\protos\eval.proto .\object_detection\protos\post_processing.proto
 ```
 This creates a name_pb2.py file from every name.proto file in the \object_detection\protos folder.
 
@@ -150,9 +157,31 @@ Finally, run the following commands from the C:\tensorflow1\models\research dire
 
 #### 2g. Test TensorFlow setup to verify it works
 The TensorFlow Object Detection API is now all set up to use pre-trained models for object detection, or to train a new one. You can test it out and verify your installation is working by launching the object_detection_tutorial.ipynb script with Jupyter. From the \object_detection directory, issue this command:
+
+::You can test that you have correctly installed the Tensorflow Object Detection API by running the following command:
+::https://github.com/tensorflow/models/blob/master/research/object_detection/g3doc/installation.md
+```
+python object_detection/builders/model_builder_test.py
+```
+::成功将返回0个失败
+
+::若出现以下情况，表示jupyter notebook安装未成功，可在anaconda中当前环境（tensorflow1.12）下安装；若最新版本不可安装，可以选择5.6.0版本
+```
+(tensorflow1.12) C:\tensorflow1\models\research>jupyter notebook
+```
+::报错信息 ImportError: cannot import name 'Type'
+::若报错，尝试使用conda安装
+conda install jupyter notebook
+conda install pillow
+conda install lxml
+conda install Cython
+conda install matplotlib
+conda install pandas
+conda install opencv-python
 ```
 (tensorflow1) C:\tensorflow1\models\research\object_detection> jupyter notebook object_detection_tutorial.ipynb
 ```
+:: 如果能运行到最后，但是plt.imshow(image_np)不能出图，则可能matplotlib安装失败，可充气电脑，或重新使用conda安装以上包
 This opens the script in your default web browser and allows you to step through the code one section at a time. You can step through each section by clicking the “Run” button in the upper toolbar. The section is done running when the “In [ * ]” text next to the section populates with a number (e.g. “In [1]”). 
 
 (Note: part of the script downloads the ssd_mobilenet_v1 model from GitHub, which is about 74MB. This means it will take some time to complete the section, so be patient.)
@@ -163,6 +192,65 @@ Once you have stepped all the way through the script, you should see two labeled
   <img src="doc/jupyter_notebook_dogs.jpg">
 </p>
 
+若出现问题：ValueError: First step cannot be zero.
+请修改文件C:\tensorflow1\models\research\object_detection\training\faster_rcnn_inception_v2_pets.config
+将下面内容
+```
+train_config: {
+  batch_size: 1
+  optimizer {
+    momentum_optimizer: {
+      learning_rate: {
+        manual_step_learning_rate {
+          initial_learning_rate: 0.0002
+          schedule {
+            step: 0
+            learning_rate: .0002
+          }
+          schedule {
+            step: 900000
+            learning_rate: .00002
+          }
+          schedule {
+            step: 1200000
+            learning_rate: .000002
+          }
+        }
+      }
+      momentum_optimizer_value: 0.9
+    }
+    use_moving_average: false
+  }
+ ```
+ 改为
+ ```
+ train_config: {
+  batch_size: 1
+  optimizer {
+    momentum_optimizer: {
+      learning_rate: {
+        manual_step_learning_rate {
+          initial_learning_rate: 0.0002
+          schedule {
+            step: 9000
+            learning_rate: .0002
+          }
+          schedule {
+            step: 900000
+            learning_rate: .00002
+          }
+          schedule {
+            step: 1200000
+            learning_rate: .000002
+          }
+        }
+      }
+      momentum_optimizer_value: 0.9
+    }
+    use_moving_average: false
+  }
+  ```
+  原来作者的说明中存在错误，本人已经修改该文件，并上传
 ### 3. Gather and Label Pictures
 Now that the TensorFlow Object Detection API is all set up and ready to go, we need to provide the images it will use to train a new detection classifier.
 
@@ -334,7 +422,9 @@ Save the file after the changes have been made. That’s it! The training job is
 *As of version 1.9, TensorFlow has deprecated the "train.py" file and replaced it with "model_main.py" file. I haven't been able to get model_main.py to work correctly yet (I run in to errors related to pycocotools). Fortunately, the train.py file is still available in the /object_detection/legacy folder. Simply move train.py from /object_detection/legacy into the /object_detection folder and then continue following the steps below.*
 
 Here we go! From the \object_detection directory, issue the following command to begin training:
+Simply move train.py from /object_detection/legacy into the /object_detection
 ```
+cd C:\tensorflow1\models\research\object_detection
 python train.py --logtostderr --train_dir=training/ --pipeline_config_path=training/faster_rcnn_inception_v2_pets.config
 ```
 If everything has been set up correctly, TensorFlow will initialize the training. The initialization can take up to 30 seconds before the actual training begins. When training begins, it will look like this:
