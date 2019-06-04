@@ -12,7 +12,7 @@ I also made a YouTube video that walks through this tutorial. Any discrepancies 
 **If there are differences between this written tutorial and the video, follow the written tutorial!**
 
 [![Link to my YouTube video!](https://raw.githubusercontent.com/EdjeElectronics/TensorFlow-Object-Detection-API-Tutorial-Train-Multiple-Objects-Windows-10/master/doc/YouTube%20video.jpg)](https://www.youtube.com/watch?v=Rgpfk6eYxJA)
-
+视频存放于YouTube，国内无法直接打开观看，需采取些其他措施，你懂的。
 This readme describes every step required to get going with your own object detection classifier: 
 1. [Installing TensorFlow-GPU](https://github.com/EdjeElectronics/TensorFlow-Object-Detection-API-Tutorial-Train-Multiple-Objects-Windows-10#1-install-tensorflow-gpu-15-skip-this-step-if-tensorflow-gpu-15-is-already-installed)
 2. [Setting up the Object Detection directory structure and Anaconda Virtual Environment](https://github.com/EdjeElectronics/TensorFlow-Object-Detection-API-Tutorial-Train-Multiple-Objects-Windows-10#2-set-up-tensorflow-directory-and-anaconda-virtual-environment)
