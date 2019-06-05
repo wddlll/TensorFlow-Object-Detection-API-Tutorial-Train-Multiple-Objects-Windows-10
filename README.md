@@ -444,8 +444,11 @@ You can view the progress of the training job by using TensorBoard. To do this, 
 ```
 (tensorflow1) C:\tensorflow1\models\research\object_detection>tensorboard --logdir=training
 ```
-This will create a webpage on your local machine at YourPCName:6006, which can be viewed through a web browser. The TensorBoard page provides information and graphs that show how the training is progressing. One important graph is the Loss graph, which shows the overall loss of the classifier over time.
-
+This will create a webpage on your local machine at YourPCName:6006（YourPCName:6006在很多电脑不可用，可能与用户名有关） or http://localhost:6006, which can be viewed through a web browser. The TensorBoard page provides information and graphs that show how the training is progressing. One important graph is the Loss graph, which shows the overall loss of the classifier over time.
+在Google Chrome或其他浏览器中输入
+```
+http://localhost:6006
+```
 <p align="center">
   <img src="doc/loss_graph.JPG">
 </p>
