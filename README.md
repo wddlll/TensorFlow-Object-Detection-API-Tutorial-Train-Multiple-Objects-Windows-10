@@ -530,3 +530,29 @@ rate_index = tf.reduce_max(tf.where(tf.greater_equal(global_step, boundaries),
 ```
 
 [Ref: Tensorflow Issue#3705](https://github.com/tensorflow/models/issues/3705#issuecomment-375563179)
+
+#### 5. 针对小目标对象识别，修改步长.为使得最终的feature map不至于太小，需修改步长（features_stride）
+主要是在
+\models\research\slim\nets
+涉及下采样的位置包括
+```
+line 235, net = slim.max_pool2d(net, [3, 3], stride=2, scope='pool1')
+line 317-320,
+      resnet_v1_block('block1', base_depth=64, num_units=3, stride=2),
+      resnet_v1_block('block2', base_depth=128, num_units=4, stride=2),
+      resnet_v1_block('block3', base_depth=256, num_units=23, stride=2),
+      resnet_v1_block('block4', base_depth=512, num_units=3, stride=1),
+```
+改为
+```
+  blocks = [
+      resnet_v1_block('block1', base_depth=64, num_units=3, stride=2),
+      resnet_v1_block('block2', base_depth=128, num_units=4, stride=2),
+      resnet_v1_block('block3', base_depth=256, num_units=6, stride=1),
+      resnet_v1_block('block4', base_depth=512, num_units=3, stride=1),
+  ]
+```
+总计下采样 2*2*2*2=16倍，因此feature map宽度 600/16=37.5
+若一只动物的标记框有32*16像素，在最终的feature map只有2*1个像素，考虑到标记框内真实动物对象的信息更少，在最终的feature map将不足2*1个像素。
+若减少1次下采样，即下采样features_stride从16改为8，则该动物将增加一倍，标记框则有4*2个像素，动物对象占有的像素将超过1个像素，留给分类器的参考信息更多，因此精度更高。
+
