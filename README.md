@@ -50,8 +50,9 @@ The video is made for TensorFlow-GPU v1.4, but the “pip install --upgrade tens
 
 Be sure to install Anaconda with Python 3.6 as instructed in the video, as the Anaconda virtual environment will be used for the rest of this tutorial.
 
-我安装的是Anaconda3-5.0.1-Windows-x86_64.exe版本，Python 3.5.0，TensorFlow-CPU 1.12.0，可以成功安装。
-
+CPU我安装的是Anaconda3-5.0.1-Windows-x86_64.exe版本，Python 3.5.0，TensorFlow-CPU 1.12.0，可以成功安装。
+GPU我安装的是 cuda_9.0.176_win10.exe（直接安装），cuDNN v7.2.1 (August 7, 2018), for CUDA 9.0，否则可能出现明明有有文件，但找不到。 Could not find 'cudnn64_7.dll'
+参照https://blog.csdn.net/weixin_39290638/article/details/80045236 安装gpu版TensorFlow版
 Visit [TensorFlow's website](https://www.tensorflow.org/install/install_windows) for further installation details, including how to install it on other operating systems (like Linux). The [object detection repository](https://github.com/tensorflow/models/tree/master/research/object_detection) itself also has [installation instructions](https://github.com/tensorflow/models/blob/master/research/object_detection/g3doc/installation.md).
 
 ### 2. Set up TensorFlow Directory and Anaconda Virtual Environment
