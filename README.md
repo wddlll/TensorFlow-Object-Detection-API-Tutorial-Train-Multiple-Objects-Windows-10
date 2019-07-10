@@ -607,8 +607,8 @@ line 317-320,
       }
     }
   ```
-    将
-   ```
+
+  ```
     first_stage_anchor_generator {
       grid_anchor_generator {
 	height: 64
@@ -619,7 +619,7 @@ line 317-320,
         width_stride: 16
       }
     ```
-    修改为：
+    修改为：    
     ```
       first_stage_anchor_generator {
       grid_anchor_generator {
