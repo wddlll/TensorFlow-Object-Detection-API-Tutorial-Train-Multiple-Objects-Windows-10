@@ -618,9 +618,9 @@ line 317-320,
         height_stride: 16
         width_stride: 16
       }
-    ```
+  ```
     修改为：    
-    ```
+  ```
       first_stage_anchor_generator {
       grid_anchor_generator {
 	#height: 256  此行及下一行没有，默认提案框大小为256，对小目标不能识别，小汽车用64*64，无人机动物为32*32
@@ -630,4 +630,4 @@ line 317-320,
         height_stride: 16
         width_stride: 16
       }
-    ```
+  ```
