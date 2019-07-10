@@ -50,9 +50,9 @@ The video is made for TensorFlow-GPU v1.4, but the “pip install --upgrade tens
 
 Be sure to install Anaconda with Python 3.6 as instructed in the video, as the Anaconda virtual environment will be used for the rest of this tutorial.
 
-CPU我安装的是Anaconda3-5.0.1-Windows-x86_64.exe版本，Python 3.5.0，TensorFlow-CPU 1.12.0，可以成功安装。
-GPU我安装的是 cuda_9.0.176_win10.exe（直接安装），cuDNN v7.2.1 (August 7, 2018), for CUDA 9.0
-::安装cuda后，再安装 v7.6.0.64, 把cudnn-9.0-windows10-x64-v7.6.0.64\cuda下面的 lib include bin三个目录拷贝到如下目录下
+CPU版，我安装的是Anaconda3-5.0.1-Windows-x86_64.exe版本，Python 3.5.0，TensorFlow-CPU 1.12.0，可以成功安装。
+GPU版（我的GPU为最新出产的笔记本GTX1660ti显卡），我安装的是GeForce_Experience_v3.19.0.107图形驱动+cuda9.0（cuda_9.0.176_win10.exe等，包含4个补丁，必须全部安装）+Cudnn7.3.1 for CUDA 9.0+Anaconda3-5.0.1-Windows-x86_64.exe版本，Python 3.6.8，TensorFlow1.12 
+::安装cuda后，再安装 Cudnn7.3.1, 把cudnn-9.0-windows10-x64-v7.6.0.64\cuda下面的 lib include bin三个目录拷贝到如下目录下
 C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v9.0（记得不是C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA文件夹下，否则可能出现明明有有文件，但找不到。 Could not find 'cudnn64_7.dll'，目录不对）
 
 
