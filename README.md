@@ -568,7 +568,6 @@ line 20,
 \models\research\slim\nets
 涉及下采样的位置包括
 ```
-```
 line 235, net = slim.max_pool2d(net, [3, 3], stride=2, scope='pool1')
 line 317-320,
       resnet_v1_block('block1', base_depth=64, num_units=3, stride=2),
@@ -590,32 +589,26 @@ line 317-320,
 若一只动物的标记框有32*16像素，在最终的feature map只有2*1个像素，考虑到标记框内真实动物对象的信息更少，在最终的feature map将不足2*1个像素。
 若减少1次下采样，即下采样features_stride从16改为8，则该动物将增加一倍，标记框则有4*2个像素，动物对象占有的像素将超过1个像素，留给分类器的参考信息更多，因此精度更高。
 
-6、在faster_rcnn_inception_v2_pets.config文件中修改
+6、在faster_rcnn_inception_v2_pets.config文件中
+  ```
+  image_resizer {
+      keep_aspect_ratio_resizer {
+        min_dimension: 600
+        max_dimension: 1000
+      }
+    }
+  ```
+  修改为
+  ```
     image_resizer {
       keep_aspect_ratio_resizer {
         min_dimension: 224
         max_dimension: 400
       }
     }
-    原来：
-    image_resizer {
-      keep_aspect_ratio_resizer {
-        min_dimension: 600
-        max_dimension: 1000
-      }
-    }
-    
-    first_stage_anchor_generator {
-      grid_anchor_generator {
-	#height: 256  此行及下一行没有，默认提案框大小为256，对小目标不能识别，小汽车用64*64，无人机动物为32*32
-	#width: 256
-        scales: [0.25, 0.5, 1.0, 2.0]
-        aspect_ratios: [0.5, 1.0, 2.0]
-        height_stride: 16
-        width_stride: 16
-      }
-      
-    原来：
+  ```
+    将
+   ```
     first_stage_anchor_generator {
       grid_anchor_generator {
 	height: 64
@@ -625,4 +618,16 @@ line 317-320,
         height_stride: 16
         width_stride: 16
       }
-
+    ```
+    修改为：
+    ```
+      first_stage_anchor_generator {
+      grid_anchor_generator {
+	#height: 256  此行及下一行没有，默认提案框大小为256，对小目标不能识别，小汽车用64*64，无人机动物为32*32
+	#width: 256
+        scales: [0.25, 0.5, 1.0, 2.0]
+        aspect_ratios: [0.5, 1.0, 2.0]
+        height_stride: 16
+        width_stride: 16
+      }
+    ```
