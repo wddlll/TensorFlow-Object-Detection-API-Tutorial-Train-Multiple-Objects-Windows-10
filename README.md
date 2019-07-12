@@ -493,6 +493,52 @@ If everything is working properly, the object detector will initialize for about
 
 If you encounter errors, please check out the Appendix: it has a list of errors that I ran in to while setting up my object detection classifier. You can also trying Googling the error. There is usually useful information on Stack Exchange or in TensorFlow’s Issues on GitHub.
 
+9. Run the Evaluation
+运行评估前，需要安装git和pycocotools
+
+```
+在网上搜索下载安装vc++2015（或vc++2017，14版本）
+conda install git
+pip install git+https://github.com/philferriere/cocoapi.git#subdirectory=PythonAPI
+
+把安装到C:\ProgramData\Anaconda3\envs\tensorflow-cpu\Lib\site-packages\pycocotools的pycocotools文件夹复制到C:\tensorflow1\models\research\文件夹下
+```
+
+From the \object_detection directory, issue the following command to begin evaluation:
+```
+python eval.py --logtostderr
+```
+Check the evaluation in tensorboard
+
+```
+tensorboard --logdir=images/eval 
+```
+--logdir=images/eval 为#path to log dirction
+运行中遇到NameError: name 'unicode' is not defined，这是因为python 3.X版本中已经没有unicode函数，可将Unicode（）替换为str（）
+将C:\tensorflow1\models\research\object_detection\utils\object_detection_evaluation.py，line 213中
+```
+try:
+         category_name = unicode(category_name, 'utf-8')
+       except TypeError:
+```
+修改为
+```
+try:
+          category_name = str(category_name, 'utf-8')
+        except TypeError:
+```
+line 354，中
+```
+        try:
+          category_name = str(category_name, 'utf-8')
+```
+修改为
+```
+        try:
+          category_name = str(category_name, 'utf-8')
+```
+If you encounter errors, please check out the Appendix: it has a list of errors that I ran in to while setting up my object detection classifier. You can also trying Googling the error. There is usually useful information on Stack Exchange or in TensorFlow’s Issues on GitHub.
+
 ## Appendix: Common Errors
 It appears that the TensorFlow Object Detection API was developed on a Linux-based operating system, and most of the directions given by the documentation are for a Linux OS. Trying to get a Linux-developed software library to work on Windows can be challenging. There are many little snags that I ran in to while trying to set up tensorflow-gpu to train an object detection classifier on Windows 10. This Appendix is a list of errors I ran in to, and their resolutions.
 
