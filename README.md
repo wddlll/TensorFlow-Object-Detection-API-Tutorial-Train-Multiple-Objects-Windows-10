@@ -538,6 +538,21 @@ line 354，中
           category_name = str(category_name, 'utf-8')
 ```
 If you encounter errors, please check out the Appendix: it has a list of errors that I ran in to while setting up my object detection classifier. You can also trying Googling the error. There is usually useful information on Stack Exchange or in TensorFlow’s Issues on GitHub.
+#通过VS Code调试 tensorflow
+参照 https://jingyan.baidu.com/article/e5c39bf5e89c3039d660336a.html 打开编辑器后，点击左下方的齿轮状图标
+在弹出菜单中，点击【settings】子菜单
+在弹出的菜单中，点击【show modified settings】子菜单，找到下面的Edit in settings.json 超链接
+
+例如，安装环境为 C:\ProgramData\Anaconda3\envs\tensorflow-cpu\Lib\site-packages
+将settings.json文件修改为如下
+{
+    "python.pythonPath": "C:\\ProgramData\\Anaconda3\\envs\\tensorflow-cpu"
+    "python.autoComplete.extraPaths": [
+        "C:\\ProgramData\\Anaconda3\\envs\\tensorflow-cpu",
+        "C:\\ProgramData\\Anaconda3\\envs\tensorflow-cpu\\Lib\\site-packages"
+    ],
+    "python.autoComplete.addBrackets": true,
+}
 
 ## Appendix: Common Errors
 It appears that the TensorFlow Object Detection API was developed on a Linux-based operating system, and most of the directions given by the documentation are for a Linux OS. Trying to get a Linux-developed software library to work on Windows can be challenging. There are many little snags that I ran in to while trying to set up tensorflow-gpu to train an object detection classifier on Windows 10. This Appendix is a list of errors I ran in to, and their resolutions.
