@@ -542,8 +542,8 @@ If you encounter errors, please check out the Appendix: it has a list of errors 
 参照 https://jingyan.baidu.com/article/e5c39bf5e89c3039d660336a.html 打开编辑器后，点击左下方的齿轮状图标
 在弹出菜单中，点击【settings】子菜单
 在弹出的菜单中，点击【show modified settings】子菜单，找到下面的Edit in settings.json 超链接
-
 例如，安装环境为 C:\ProgramData\Anaconda3\envs\tensorflow-cpu\Lib\site-packages
+参照https://blog.csdn.net/Briliantly/article/details/82847804
 将settings.json文件修改为如下
 {
     "python.pythonPath": "C:\\ProgramData\\Anaconda3\\envs\\tensorflow-cpu"
