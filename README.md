@@ -538,7 +538,7 @@ line 354，中
           category_name = str(category_name, 'utf-8')
 ```
 If you encounter errors, please check out the Appendix: it has a list of errors that I ran in to while setting up my object detection classifier. You can also trying Googling the error. There is usually useful information on Stack Exchange or in TensorFlow’s Issues on GitHub.
-#通过VS Code调试 tensorflow
+## 通过VS Code调试 tensorflow
 参照 https://jingyan.baidu.com/article/e5c39bf5e89c3039d660336a.html 打开编辑器后，点击左下方的齿轮状图标
 在弹出菜单中，点击【settings】子菜单
 在弹出的菜单中，点击【show modified settings】子菜单，找到下面的Edit in settings.json 超链接
