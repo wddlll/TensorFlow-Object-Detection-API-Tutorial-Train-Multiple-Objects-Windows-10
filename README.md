@@ -553,11 +553,11 @@ If you encounter errors, please check out the Appendix: it has a list of errors 
     ],
     "python.autoComplete.addBrackets": true,
 }
-
+常见问题
 ## Appendix: Common Errors
 It appears that the TensorFlow Object Detection API was developed on a Linux-based operating system, and most of the directions given by the documentation are for a Linux OS. Trying to get a Linux-developed software library to work on Windows can be challenging. There are many little snags that I ran in to while trying to set up tensorflow-gpu to train an object detection classifier on Windows 10. This Appendix is a list of errors I ran in to, and their resolutions.
 
-#### 1. ModuleNotFoundError: No module named 'deployment'
+#### 1. ModuleNotFoundError: No module named 'nets' or ModuleNotFoundError: No module named 'deployment' 
 
 This error occurs when you try to run object_detection_tutorial.ipynb or train.py and you don’t have the PATH and PYTHONPATH environment variables set up correctly. Exit the virtual environment by closing and re-opening the Anaconda Prompt window. Then, issue “activate tensorflow1” to re-enter the environment, and then issue the commands given in Step 2e. 
 
@@ -568,7 +568,6 @@ Also, make sure you have run these commands from the \models\research directory:
 setup.py build
 setup.py install
 ```
-
 #### 2. ImportError: cannot import name 'preprocessor_pb2'
 
 #### ImportError: cannot import name 'string_int_label_map_pb2'
