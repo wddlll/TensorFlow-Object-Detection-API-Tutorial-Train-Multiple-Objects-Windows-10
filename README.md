@@ -506,7 +506,7 @@ pip install git+https://github.com/philferriere/cocoapi.git#subdirectory=PythonA
 
 From the \object_detection directory, issue the following command to begin evaluation:
 ```
-python eval.py --logtostderr
+python eval.py --checkpoint_dir==training/ --eval_dir==images/eval/ --pipeline_config_path==training/faster_rcnn_inception_v2_pets.config  
 ```
 Check the evaluation in tensorboard
 
