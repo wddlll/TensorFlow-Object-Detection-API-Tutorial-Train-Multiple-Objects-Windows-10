@@ -407,7 +407,8 @@ Finally, the object detection training pipeline must be configured. It defines w
 Navigate to C:\tensorflow1\models\research\object_detection\samples\configs and copy the faster_rcnn_inception_v2_pets.config file into the \object_detection\training directory. Then, open the file with a text editor. There are several changes to make to the .config file, mainly changing the number of classes and examples, and adding the file paths to the training data.
 
 Make the following changes to the faster_rcnn_inception_v2_pets.config file. Note: The paths must be entered with single forward slashes (NOT backslashes), or TensorFlow will give a file path error when trying to train the model! Also, the paths must be in double quotation marks ( " ), not single quotation marks ( ' ).
-
+- feature_extractor：表示用于特征提取的backbone网络的选型
+First_stage_features_stride表示第一阶段特征提取步长，根据经验，训练时可以保持 16 不变，如果待检测目标比较密集且较小，则可以尝试将其修改为8，以降低特征提取步长，提高特征提取密度，从而提升模型效果。修改为4的话会导致及结算量巨大，而且容易导致训练的过度抖动，难以拟合，因此建议最小改成8。如果目标较大，步长为8，totalloss也难以收敛拟合，可以改为16. https://blog.csdn.net/wubingwei12/article/details/88184140
 - Line 9. Change num_classes to the number of different objects you want the classifier to detect. For the above basketball, shirt, and shoe detector, it would be num_classes : 3 .
 - Line 110. Change fine_tune_checkpoint to:
   - fine_tune_checkpoint : "C:/tensorflow1/models/research/object_detection/faster_rcnn_inception_v2_coco_2018_01_28/model.ckpt"
